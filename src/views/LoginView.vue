@@ -36,7 +36,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn class="mr-2 mb-2" color="accent" :disabled="inputsAreCorrect" to="/list"> Login </v-btn>
+        <v-btn class="mr-2 mb-2" color="accent" data-testid="login-button" :disabled="!inputsAreCorrect" to="/list"> Login </v-btn>
       </v-card-actions>
     </v-card>
   </v-layout>
@@ -66,8 +66,7 @@
       inputsAreCorrect () {
         const emailValidation = emailPattern.test(this.email)
         this.$store.commit('setUserName', this.name)
-        console.log(this.$store.state.login.userName);
-        return this.name && this.email && this.password && emailValidation ? false : true;
+        return this.name && this.email && this.password && emailValidation ? true : false;
       },
     },
     name: 'LoginView'
