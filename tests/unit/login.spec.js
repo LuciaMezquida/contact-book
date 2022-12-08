@@ -1,4 +1,4 @@
-import {expect, jest, test} from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Login from '@/views/LoginView'
 import Vue from 'vue';
@@ -16,7 +16,7 @@ const mutations = {
 
 const store = new Vuex.Store({ mutations })
 
-describe('Login.vue', () => {
+describe('LoginView.vue', () => {
   describe('When the inputs are not correctly filled', () => {
     test('should show a disabled login button', () => {
       const wrapper = shallowMount(Login, {
