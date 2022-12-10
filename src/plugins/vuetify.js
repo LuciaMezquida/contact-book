@@ -10,7 +10,7 @@ const vuetify = new Vuetify({
       light: {
         accent: colors.teal.lighten1,
         warning: colors.orange,
-        error: colors.red.lighten1,
+        danger: colors.red.lighten1,
         success: colors.green,
       },
     },
