@@ -12,7 +12,7 @@
           New contact
         </v-btn>
         <v-dialog v-model="dialog" max-width="500px">
-          <DialogForm :contactInfo="contactInfo" :formTitle="formTitle" @close-dialog="closeDialog"/>
+          <DialogForm :contactInfo="contactInfo" :emailList="emailList" :formTitle="formTitle" @close-dialog="closeDialog"/>
         </v-dialog>
         <DialogDeleteContact :dialogDelete="dialogDelete" @close-delete-dialog="closeDeleteDialog"/>
       </v-toolbar>
@@ -69,6 +69,9 @@
           items: this.contactList,
           loading: this.loading
         }
+      },
+      emailList () {
+        return this.contactList.map(item => item.email)
       }
     },
     methods: {
@@ -78,7 +81,6 @@
         this.dialog = true
       },
       editContact (item) {
-        console.log(item);
         this.formTitle = 'Edit contact'
         this.contactInfo = item
         this.dialog = true

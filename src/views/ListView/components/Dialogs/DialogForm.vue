@@ -11,6 +11,8 @@
               v-model="firstName"
               color="accent"
               label="First name"
+              required
+              :rules="[rules.required]"
             />
           </v-col>
           <v-col cols="12" sm="6" md="6">
@@ -18,6 +20,8 @@
               v-model="lastName"
               color="accent"
               label="Last name"
+              required
+              :rules="[rules.required]"
             />
           </v-col>
           <v-col cols="12" sm="6" md="6">
@@ -25,6 +29,8 @@
               v-model="email"
               color="accent"
               label="Email"
+              required
+              :rules="[rules.required, rules.email]"
             />
           </v-col>
           <v-col cols="12" sm="6" md="6">
@@ -32,6 +38,8 @@
               v-model="phoneNumber"
               color="accent"
               label="Phone number"
+              required
+              :rules="[rules.required]"
             />
           </v-col>
         </v-row>
@@ -41,7 +49,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn color="accent" text @click="closeDialog">Cancel</v-btn>
-      <v-btn color="accent" text @click="saveContact">Save</v-btn>
+      <v-btn color="accent" text @click="saveContact" :disabled="!inputsAreCorrect">Save</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -55,13 +63,23 @@
           lastName: '',
           email: '',
           phoneNumber: ''
-        }
+        },
+        rules: {
+          required: value => !!value || 'This field is required',
+          email: value => {
+            return !this.emailList.filter(email => email !== this.contactInfo.email).includes(value) || 'This e-mail already exists.'
+          },
+        },
       }
     },
     props: {
       contactInfo: {
         type: Object,
         default: () => {}
+      },
+      emailList: {
+        type: Array,
+        default: () => []
       },
       formTitle: {
         type: String,
@@ -100,6 +118,10 @@
         set(value) {
           this.contact.phoneNumber = value
         }
+      },
+      inputsAreCorrect () {
+        const emailIsNotRepeated = !this.emailList.filter(email => email !== this.contactInfo.email).includes(this.contact.email)
+        return this.contact.firstName && this.contact.lastName && this.contact.email && this.contact.phoneNumber && emailIsNotRepeated ? true : false;
       }
     },
     methods: {
@@ -108,7 +130,6 @@
       },
       saveContact() {
         //TODO: save contact to database
-        console.log(this.contact);
         this.$emit('close-dialog')
       }
     },
