@@ -1,23 +1,28 @@
 export const CONTACT_TABLE_HEADERS = [
   { 
     text: 'First Name', 
-    value: 'firstName'
+    value: 'firstName',
+    sortable: false
   },
   { 
     text: 'Last Name', 
-    value: 'lastName' 
+    value: 'lastName' ,
+    sortable: false
   },
   { 
     text: 'Email', 
-    value: 'email' 
+    value: 'email',
+    sortable: false
   },
   { 
     text: 'Phone Number', 
-    value: 'phoneNumber' 
+    value: 'phoneNumber',
+    sortable: false
   },
   { 
-    text: 'Actions', 
-    value: 'actions', 
-    align: 'center' 
+    text: 'Actions',
+    value: 'actions',
+    sortable: false,
+    align: 'center'
   }
 ]

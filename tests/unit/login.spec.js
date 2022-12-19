@@ -1,6 +1,6 @@
 import { expect, jest, test } from '@jest/globals';
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Login from '@/views/LoginView'
+import Login from '@/views/LoginView/LoginView'
 import Vue from 'vue';
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'

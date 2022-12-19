@@ -18,21 +18,6 @@
       <v-card-title>
         <h3 class="headline">Contact list</h3>
       </v-card-title>
-      <!-- NEW CONTACT BUTTON -->
-      <v-layout mr-4 mb-6>
-        <v-spacer></v-spacer>
-        <v-btn
-          class="mb-2"
-          color="accent"
-          data-testid="add-contact-button"
-          depressed
-          @click="showDialog = true"
-        >
-          <v-icon small class="mr-2">mdi-account-plus</v-icon>
-          New contact
-        </v-btn>
-      </v-layout>
-      <DialogForm :dialog="showDialog" formTitle="New Contact" @close-dialog="closeDialog"/>
       <!-- TABLE -->
       <ContactTable :contactList="contactList" :loading="loading"/>
       <v-divider></v-divider>
@@ -43,21 +28,16 @@
 <script>
   import {contacts} from './contacts'
   import ContactTable from './components/ContactTable/ContactTable.vue'
-  import DialogForm from './components/Dialogs/DialogForm.vue'
 
   export default {
     data() {
       return {
         contactList: [], 
         loading: false,
-        showDialog: false,
         userName: this.$store.state.login.userName
       }
     },
     methods: {
-      closeDialog() {
-        this.showDialog = false
-      },
       getContactList() {
         this.loading = true
         this.contactList = contacts.data
@@ -75,11 +55,10 @@
     },
     mounted() {
       this.getContactList()
-      this.goToLogin()
+      // this.goToLogin()
     },
     components: {
-      ContactTable,
-      DialogForm
+      ContactTable
     },
     name: 'ContactList'
   }

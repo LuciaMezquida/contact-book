@@ -5,7 +5,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="accent" text @click="closeDelete">Cancel</v-btn>
-        <v-btn color="accent" text @click="deleteContactConfirm">OK</v-btn>
+        <v-btn color="accent" text @click="deleteItemConfirm">OK</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -20,12 +20,13 @@
       }
     },
     methods: {
-      closeDelete() {
+      closeDelete () {
         this.$emit('close-delete-dialog')
       },
-      deleteContactConfirm() {
-        this.$emit('deleteContact')
-      }
+      deleteItemConfirm () {
+        //TODO: delete contact from database
+        this.$emit('close-delete-dialog')
+      },
     },
     name: 'DialogDeleteContact'
   }

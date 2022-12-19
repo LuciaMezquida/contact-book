@@ -3,6 +3,21 @@
     v-bind="tableProps"
     hide-default-footer
   >
+    <!-- TABLE TOPBAR -->
+    <template #top>
+      <v-toolbar flat class="mb-6">
+        <v-spacer></v-spacer>
+        <v-btn color="accent" data-testid="add-contact-button" @click="createNewContact()">
+          <v-icon small class="mr-2">mdi-account-plus</v-icon>
+          New contact
+        </v-btn>
+        <v-dialog v-model="dialog" max-width="500px">
+          <DialogForm :contactInfo="contactInfo" :formTitle="formTitle" @close-dialog="closeDialog"/>
+        </v-dialog>
+        <DialogDeleteContact :dialogDelete="dialogDelete" @close-delete-dialog="closeDeleteDialog"/>
+      </v-toolbar>
+    </template>
+    <!-- TABLE CONTENT -->
     <template #items="props">
       <tr>
         <td class="text-xs">{{ props.item.firstName }}</td>
@@ -11,25 +26,14 @@
         <td class="text-xs">{{ props.item.phoneNumber }}</td>
       </tr>
     </template>
+    <!-- TABLE ACTIONS -->
     <template #item.actions="{ item }">
-      <v-tooltip bottom>
-        <template #activator="{ on }">
-          <v-btn v-on="on" icon class="mr-4" @click="showDialog = true">
-            <v-icon small>mdi-pencil</v-icon>
-          </v-btn>
-        </template>
-        <span>Edit</span>
-      </v-tooltip>
-      <DialogForm :dialog="showDialog" formTitle="Edit Contact" @close-dialog="closeDialog"/>
-      <v-tooltip bottom>
-        <template #activator="{ on }">
-          <v-btn v-on="on" icon @click="dialogDeleteContact = true">
-            <v-icon small>mdi-delete</v-icon>
-          </v-btn>
-        </template>
-        <span>Edit</span>
-      </v-tooltip>
-      <DialogDeleteContact :dialogDelete="dialogDeleteContact" @close-delete-dialog="closeDeleteDialog"/>
+      <v-btn icon class="mr-2" @click="editContact(item)">
+        <v-icon small>mdi-pencil</v-icon>
+      </v-btn>
+      <v-btn icon @click="deleteContact(item)">
+        <v-icon small>mdi-delete</v-icon>
+      </v-btn>
     </template>
   </v-data-table>
 </template>
@@ -42,8 +46,10 @@
   export default {
     data() {
       return {
-        showDialog: false,
-        dialogDeleteContact: false
+        contactInfo: {},
+        dialog: false,
+        dialogDelete: false,
+        formTitle: 'New contact'
       }
     },
     props: {
@@ -66,11 +72,26 @@
       }
     },
     methods: {
-      closeDeleteDialog() {
-        this.dialogDeleteContact = false
+      createNewContact () {
+        this.formTitle = 'New contact'
+        this.contactInfo = {}
+        this.dialog = true
       },
-      closeDialog() {
-        this.showDialog = false
+      editContact (item) {
+        console.log(item);
+        this.formTitle = 'Edit contact'
+        this.contactInfo = item
+        this.dialog = true
+      },
+      closeDialog () {
+        this.dialog = false
+      },
+      deleteContact (item) {
+        console.log(item);
+        this.dialogDelete = true
+      },
+      closeDeleteDialog () {
+        this.dialogDelete = false
       }
     },
     components: {

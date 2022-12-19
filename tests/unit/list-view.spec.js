@@ -1,6 +1,6 @@
 import { expect, jest, test } from '@jest/globals';
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import List from '@/views/ListView'
+import List from '@/views/ListView/ListView'
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
