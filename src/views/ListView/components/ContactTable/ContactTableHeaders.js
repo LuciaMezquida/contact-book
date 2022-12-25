@@ -24,5 +24,9 @@ export const CONTACT_TABLE_HEADERS = [
     value: 'actions',
     sortable: false,
     align: 'center'
+  },
+  { 
+    text: '', 
+    value: 'data-table-expand'
   }
 ]
