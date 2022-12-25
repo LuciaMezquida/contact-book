@@ -2,8 +2,9 @@
   <v-data-table
     v-bind="tableProps"
     hide-default-footer
+    no-data-text="No contacts found"
   >
-    <!-- TABLE TOPBAR -->
+    <!-- TABLE TOP-BAR -->
     <template #top>
       <v-toolbar flat class="mb-6">
         <v-spacer></v-spacer>
@@ -11,20 +12,9 @@
           <v-icon small class="mr-2">mdi-account-plus</v-icon>
           New contact
         </v-btn>
-        <v-dialog v-model="dialog" max-width="500px">
-          <DialogForm :contactInfo="contactInfo" :emailList="emailList" :formTitle="formTitle" @close-dialog="closeDialog"/>
-        </v-dialog>
-        <DialogDeleteContact :dialogDelete="dialogDelete" @close-delete-dialog="closeDeleteDialog"/>
-      </v-toolbar>
-    </template>
-    <!-- TABLE CONTENT -->
-    <template #items="props">
-      <tr>
-        <td class="text-xs">{{ props.item.firstName }}</td>
-        <td class="text-xs">{{ props.item.lastName }}</td>
-        <td class="text-xs">{{ props.item.email }}</td>
-        <td class="text-xs">{{ props.item.phoneNumber }}</td>
-      </tr>
+        <DialogForm :showDialog="showDialog" :contactInfo="contactInfo" :emailList="emailList" :formTitle="formTitle" @close-dialog="closeDialog"/>
+        </v-toolbar>
+      <DialogDeleteContact :showDialogDelete="showDialogDelete" :contactToDelete="contactToDelete" @close-dialog-delete="closeDialogDelete"/>
     </template>
     <!-- TABLE ACTIONS -->
     <template #item.actions="{ item }">
@@ -39,16 +29,17 @@
 </template>
 
 <script>
-  import DialogForm from '../Dialogs/DialogForm.vue'
-  import DialogDeleteContact from '../Dialogs/DialogDeleteContact.vue'
+  import DialogForm from '../Dialogs/DialogForm'
+  import DialogDeleteContact from '../Dialogs/DialogDeleteContact'
   import { CONTACT_TABLE_HEADERS } from './ContactTableHeaders'
 
   export default {
     data() {
       return {
         contactInfo: {},
-        dialog: false,
-        dialogDelete: false,
+        contactToDelete: {},
+        showDialog: false,
+        showDialogDelete: false,
         formTitle: 'New contact'
       }
     },
@@ -78,22 +69,22 @@
       createNewContact () {
         this.formTitle = 'New contact'
         this.contactInfo = {}
-        this.dialog = true
+        this.showDialog = true
       },
       editContact (item) {
         this.formTitle = 'Edit contact'
         this.contactInfo = item
-        this.dialog = true
+        this.showDialog = true
       },
       closeDialog () {
-        this.dialog = false
+        this.showDialog = false
       },
       deleteContact (item) {
-        console.log(item);
-        this.dialogDelete = true
+        this.contactToDelete = item
+        this.showDialogDelete = true
       },
-      closeDeleteDialog () {
-        this.dialogDelete = false
+      closeDialogDelete () {
+        this.showDialogDelete = false
       }
     },
     components: {
