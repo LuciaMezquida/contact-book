@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { contacts } from './contacts'
+  import { getContactList } from '../../api/index'
   import ContactTable from './components/ContactTable/ContactTable.vue'
 
   export default {
@@ -24,9 +24,9 @@
       }
     },
     methods: {
-      getContactList() {
+      async getContactList() {
         this.loading = true
-        this.contactList = [...contacts.data]
+        this.contactList = await getContactList()
         this.loading = false
       }
     },
