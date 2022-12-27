@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import {createContact} from '@/api/actions'
+  import { createContact } from '@/api/actions'
   export default {
     data() {
       return {

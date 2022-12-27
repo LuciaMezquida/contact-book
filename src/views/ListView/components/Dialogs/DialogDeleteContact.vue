@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import { deleteContact } from '@/api/actions'
   export default {
     props: {
       contactToDelete: {
@@ -27,9 +28,10 @@
       closeDelete () {
         this.$emit('close-dialog-delete')
       },
-      deleteItemConfirm () {
-        //TODO: delete contact from database
+      async deleteItemConfirm () {
+        await deleteContact(this.contactToDelete.id)
         this.$emit('close-dialog-delete')
+        this.$emit('update-data-table')
       },
     },
     name: 'DialogDeleteContact'

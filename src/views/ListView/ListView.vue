@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { getContactList } from '../../api/actions'
+  import { getContactList } from '@/api/actions'
   import ContactTable from './components/ContactTable/ContactTable.vue'
 
   export default {

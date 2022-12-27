@@ -15,7 +15,6 @@ export const getContactList = async () => {
 }
 
 export const createContact = async (newContact) => {
-  console.log('newContact', newContact);
   await addDoc(collection(db, "contacts"), newContact);
 }
 

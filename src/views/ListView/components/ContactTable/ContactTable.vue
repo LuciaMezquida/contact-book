@@ -10,7 +10,6 @@
     single-expand
     item-key="id"
     :expanded="expanded"
-    @click:row="(item, slot) => slot.expand(!slot.isExpanded)"
   >
     <!-- TABLE TOP-BAR -->
     <template #progress><v-progress-linear color="accent" indeterminate height="2"></v-progress-linear></template>
