@@ -18,6 +18,10 @@ export const createContact = async (newContact) => {
   await addDoc(collection(db, "contacts"), newContact);
 }
 
+export const updateContact = async (id, editedContact) => {
+  await setDoc(doc(db, "contacts", id), editedContact);
+}
+
 export const deleteContact = async (id) => {
   await deleteDoc(doc(db, "contacts", id));
 }

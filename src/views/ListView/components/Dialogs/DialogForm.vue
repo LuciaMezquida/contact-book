@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import { createContact } from '@/api/actions'
+  import { createContact, updateContact } from '@/api/actions'
   export default {
     data() {
       return {
@@ -141,7 +141,9 @@
           action: this.formTitle === 'New contact' ? 'created' : 'updated'
         }
         this.contact.history ? this.contact.history.push(history) : this.contact.history = [history]
-        await createContact(this.contact)
+        this.formTitle === 'New contact' ? await createContact(this.contact) : await updateContact(this.contactInfo.id, this.contact)
+        
+        this.$emit('close-dialog')
         this.$emit('update-data-table')
       }
     },

@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xl fluid pa-6>
-    <v-card class="ma-5" min-height="calc(100vh - 90px)">
+    <v-card class="ma-5 pa-5" min-height="calc(100vh - 90px)">
       <!-- TITLE -->
       <v-card-title>
         <h3 class="headline">Contact list</h3>
