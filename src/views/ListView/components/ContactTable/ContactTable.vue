@@ -3,6 +3,7 @@
     :headers="contactTableHeaders"
     :items="contactList"
     :loading="loading"
+    loading-text="Loading... Please wait"
     hide-default-footer
     no-data-text="No contacts found"
     show-expand
@@ -12,6 +13,7 @@
     @click:row="(item, slot) => slot.expand(!slot.isExpanded)"
   >
     <!-- TABLE TOP-BAR -->
+    <template #progress><v-progress-linear color="accent" indeterminate height="2"></v-progress-linear></template>
     <template #top>
       <v-toolbar flat class="mb-6">
         <v-spacer></v-spacer>
@@ -19,9 +21,9 @@
           <v-icon small class="mr-2">mdi-account-plus</v-icon>
           New contact
         </v-btn>
-        <DialogForm :showDialog="showDialog" :contactInfo="contactInfo" :emailList="emailList" :formTitle="formTitle" @close-dialog="closeDialog"/>
+        <DialogForm :showDialog="showDialog" :contactInfo="contactInfo" :emailList="emailList" :formTitle="formTitle" @close-dialog="closeDialog" @update-data-table="updateDataTable"/>
         </v-toolbar>
-      <DialogDeleteContact :showDialogDelete="showDialogDelete" :contactToDelete="contactToDelete" @close-dialog-delete="closeDialogDelete"/>
+      <DialogDeleteContact :showDialogDelete="showDialogDelete" :contactToDelete="contactToDelete" @close-dialog-delete="closeDialogDelete" @update-data-table="updateDataTable"/>
     </template>
     <!-- TABLE ACTIONS -->
     <template #item.actions="{ item }">
@@ -32,17 +34,15 @@
         <v-icon small>mdi-delete</v-icon>
       </v-btn>
     </template>
+    <!-- TABLE EXPANDED ROW INFO -->
     <template #expanded-item="{ headers, item }">
       <td :colspan="headers.length">
         <v-list-item v-for="(item, i) in item.history" :key="i">
           <v-list-item-avatar size="32px">
             <v-icon class="accent white--text" small>{{ setHistoryIcon(item.action) }}</v-icon>
           </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>{{ formatDate(item.date) }}</v-list-item-title>
-            <v-list-item-subtitle>The contact has been {{ item.action }}</v-list-item-subtitle>
-            <v-divider></v-divider>
-          </v-list-item-content>
+          <v-list-item-title class="body-2 item-title">{{ formatDate(item.date) }}:</v-list-item-title>
+          <v-list-item-subtitle>The contact has been {{ item.action }}</v-list-item-subtitle>
         </v-list-item>
       </td>
     </template>
@@ -103,8 +103,13 @@
       closeDialogDelete () {
         this.showDialogDelete = false
       },
+      updateDataTable() {
+        this.$emit('get-contactList')
+      },
       formatDate(date) {
-        return moment(date).format('DD MMMM YYYY, hh:mm')
+        const day = moment(date).format('DD MMMM YYYY')
+        const hour = moment(date).format('hh:mm')
+        return day + ' at ' + hour
       },
       setHistoryIcon(action){
         return action === 'created' ? 'mdi-auto-fix' : 'mdi-update'
@@ -117,3 +122,11 @@
     name: 'ContactTable',
   }
 </script>
+
+<style lang="scss" scoped>
+  .item-title {
+    font-weight: 500;
+    font-family: 'Inter' !important;
+    max-width: 220px;
+  }
+</style>

@@ -57,6 +57,7 @@
 </template>
 
 <script>
+  import {createContact} from '@/api/actions'
   export default {
     data() {
       return {
@@ -134,9 +135,14 @@
       closeDialog() {
         this.$emit('close-dialog')
       },
-      saveContact() {
-        //TODO: save contact to database
-        this.$emit('close-dialog')
+      async saveContact() {
+        const history = {
+          date: Date.now(),
+          action: this.formTitle === 'New contact' ? 'created' : 'updated'
+        }
+        this.contact.history ? this.contact.history.push(history) : this.contact.history = [history]
+        await createContact(this.contact)
+        this.$emit('update-data-table')
       }
     },
     watch:{

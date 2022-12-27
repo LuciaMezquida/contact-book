@@ -6,14 +6,14 @@
         <h3 class="headline">Contact list</h3>
       </v-card-title>
       <!-- TABLE -->
-      <ContactTable :contactList="contactList" :loading="loading"/>
+      <ContactTable :contactList="contactList" :loading="loading" @get-contactList="getContactList"/>
       <v-divider></v-divider>
     </v-card>
   </v-container>
 </template>
 
 <script>
-  import { getContactList } from '../../api/index'
+  import { getContactList } from '../../api/actions'
   import ContactTable from './components/ContactTable/ContactTable.vue'
 
   export default {

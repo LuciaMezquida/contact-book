@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore/lite';
+import { collection, doc, getDocs, addDoc, deleteDoc, setDoc } from 'firebase/firestore/lite';
 
 //las bbdd son colecciones (no tablas como en sql) y accederemos a ellas a traves de referencias
 const contacts = collection(db, 'contacts');
@@ -12,4 +12,13 @@ export const getContactList = async () => {
     return contactInfo;
   });
   return contactList;
+}
+
+export const createContact = async (newContact) => {
+  console.log('newContact', newContact);
+  await addDoc(collection(db, "contacts"), newContact);
+}
+
+export const deleteContact = async (id) => {
+  await deleteDoc(doc(db, "contacts", id));
 }
