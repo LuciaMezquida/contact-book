@@ -133,6 +133,7 @@
     },
     methods: {
       closeDialog() {
+        this.phoneNumber = ''
         this.$emit('close-dialog')
       },
       async saveContact() {
@@ -149,6 +150,9 @@
     },
     watch:{
       showDialog() {
+        console.log(this.contactInfo)
+        console.log(this.contact)
+        console.log(this.phoneNumber);
         this.contact = {}
         this.contactFilled = {
           firstName: false,

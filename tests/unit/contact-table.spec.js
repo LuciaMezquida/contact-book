@@ -1,17 +1,19 @@
 import { expect, test } from '@jest/globals';
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import ContactTable from '@/views/ListView/components/ContactTable/ContactTable'
 import DialogForm from '@/views/ListView/components/Dialogs/DialogForm'
 import DialogDeleteContact from '@/views/ListView/components/Dialogs/DialogDeleteContact'
 import Vue from 'vue';
 import Vuetify from 'vuetify'
 
+const vuetify = new Vuetify();
 const localVue = createLocalVue()
 Vue.use(Vuetify)
 
 describe('ContactTable', () => { 
-  const wrapper = shallowMount(ContactTable, {
+  const wrapper = mount(ContactTable, {
     localVue,
+    vuetify,
     propsData: {
       contactList: [
         {
@@ -19,7 +21,8 @@ describe('ContactTable', () => {
           firstName: 'Piggy',
           lastName: 'Pig',
           email: 'peggy@muppets.com',
-          phoneNumber: 2412341234
+          phoneNumber: 2412341234,
+          history: [{date: '2021-05-01T00:00:00.000Z', action: 'created'}]
         }
       ]
     }

@@ -4,7 +4,6 @@ import 'vuetify/dist/vuetify.min.css'
 import App from './App.vue'
 import colors from 'vuetify/lib/util/colors'
 import router from './router'
-import store from './store'
 import Vue from 'vue'
 import Vuetify from 'vuetify';
 
@@ -30,7 +29,6 @@ const vuetify = new Vuetify({
 new Vue({
   name: 'Root',
   router,
-  store,
   vuetify,
   render: h => h(App)
 }).$mount('#app')

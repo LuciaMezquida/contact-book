@@ -20,9 +20,21 @@
           <v-icon small class="mr-2">mdi-account-plus</v-icon>
           New contact
         </v-btn>
-        <DialogForm :showDialog="showDialog" :contactInfo="contactInfo" :emailList="emailList" :formTitle="formTitle" @close-dialog="closeDialog" @update-data-table="updateDataTable"/>
+        <DialogForm 
+          :showDialog="showDialog" 
+          :contactInfo="contactInfo" 
+          :emailList="emailList" 
+          :formTitle="formTitle" 
+          @close-dialog="closeDialog" 
+          @update-data-table="updateDataTable"
+        />
         </v-toolbar>
-      <DialogDeleteContact :showDialogDelete="showDialogDelete" :contactToDelete="contactToDelete" @close-dialog-delete="closeDialogDelete" @update-data-table="updateDataTable"/>
+      <DialogDeleteContact
+        :showDialogDelete="showDialogDelete" 
+        :contactToDelete="contactToDelete"
+        @close-dialog-delete="closeDialogDelete" 
+        @update-data-table="updateDataTable"
+      />
     </template>
     <!-- TABLE ACTIONS -->
     <template #item.actions="{ item }">
@@ -107,7 +119,7 @@
       },
       formatDate(date) {
         const day = moment(date).format('DD MMMM YYYY')
-        const hour = moment(date).format('hh:mm')
+        const hour = moment(date).format('HH:mm')
         return day + ' at ' + hour
       },
       setHistoryIcon(action){
