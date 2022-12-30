@@ -12,10 +12,10 @@ export const getContactList = async () => {
     return contactInfo;
   });
   const sortedList = contactList.sort(function (a, b) {
-    if (a.history[0].date > b.history[0].date) {
+    if (a.history[0].date < b.history[0].date) {
       return 1;
     }
-    if (a.history[0].date < b.history[0].date) {
+    if (a.history[0].date > b.history[0].date) {
       return -1;
     }
     return 0;
