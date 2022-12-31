@@ -2,7 +2,7 @@
   <v-dialog v-model="showDialog" max-width="500px" persistent>
     <v-card>
       <v-form ref="form" v-model="valid">
-        <v-card-title>
+        <v-card-title class="pt-6 pl-6">
           <span class="text-h5" data-testid="dialog-form-title">{{ formTitle }}</span>
         </v-card-title>
         <v-card-text>
@@ -48,10 +48,10 @@
           </v-container>
         </v-card-text>
 
-        <v-card-actions>
+        <v-card-actions class="pb-6 pr-6">
           <v-spacer></v-spacer>
           <v-btn color="accent" data-testid="dialog-form-cancel-btn" text @click="closeDialog">Cancel</v-btn>
-          <v-btn color="accent" data-testid="dialog-form-save-btn" text @click="saveContact" :disabled="!valid">Save</v-btn>
+          <v-btn color="accent" data-testid="dialog-form-save-btn" depressed @click="saveContact" :disabled="!valid">Save</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>

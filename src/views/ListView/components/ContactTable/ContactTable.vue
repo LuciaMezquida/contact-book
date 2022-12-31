@@ -16,7 +16,7 @@
     <template #top>
       <v-toolbar flat class="mb-6">
         <v-spacer></v-spacer>
-        <v-btn color="accent" data-testid="add-contact-button" @click="createNewContact()">
+        <v-btn color="accent" data-testid="add-contact-button" depressed @click="createNewContact()">
           <v-icon small class="mr-2">mdi-account-plus</v-icon>
           New contact
         </v-btn>
