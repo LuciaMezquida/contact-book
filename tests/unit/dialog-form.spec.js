@@ -4,6 +4,7 @@ import DialogForm from '@/views/ListView/components/Dialogs/DialogForm'
 import Vue from 'vue';
 import Vuetify from 'vuetify'
 
+const vuetify = new Vuetify();
 const localVue = createLocalVue()
 Vue.use(Vuetify)
 
@@ -11,6 +12,7 @@ describe('DialogForm', () => {
   describe('When the contact info is received by props', () => {
     const wrapper = shallowMount(DialogForm, {
       localVue,
+      vuetify,
       propsData: {
         contactInfo: {
           id: '90cf7535-20ea-4aaa-a659-82230b40af36',
@@ -50,6 +52,12 @@ describe('DialogForm', () => {
   describe('When the contact info received is empty', () => {
     const wrapper = shallowMount(DialogForm, {
       localVue,
+      vuetify,
+      data(){
+        return {
+          valid: true
+        }
+      },
       propsData: {
         contactInfo: {},
         emailList: [],
@@ -57,7 +65,8 @@ describe('DialogForm', () => {
         showDialog: true
       }
     })
-    test('should show a disabled "OK" button', () => {
+    test('should show a disabled "OK" button', async() => {
+      await wrapper.setData({ valid: false })
       expect(wrapper.find('[data-testid="dialog-form-save-btn"]').attributes('disabled')).toBe('true')
     })
   })
