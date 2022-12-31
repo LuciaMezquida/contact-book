@@ -1,3 +1,4 @@
+import { selectors } from '../fixtures/selectors.js'
 import { expect, test } from '@jest/globals';
 import { mount, createLocalVue } from '@vue/test-utils'
 import ContactTable from '@/views/ListView/components/ContactTable/ContactTable'
@@ -28,7 +29,10 @@ describe('ContactTable', () => {
     }
   })
   test('should show an "Add Contact" button', () => {
-    expect(wrapper.find('[data-testid="add-contact-button"]').exists()).toBe(true)
+    expect(wrapper.find(selectors.CONTACT_TABLE.ADD_CONTACT_BUTTON).exists()).toBe(true)
+  })
+  test('should render a contact list', () => {
+    expect(wrapper.find(selectors.CONTACT_TABLE.TABLE).exists()).toBe(true)
   })
   test(`should render the 'DialogForm' component`, () => {
     expect(wrapper.findComponent(DialogForm).exists()).toBe(true)

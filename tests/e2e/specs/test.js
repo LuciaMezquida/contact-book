@@ -1,8 +1,13 @@
-// https://docs.cypress.io/api/table-of-contents
+import { selectors } from '../../fixtures/selectors.js'
+import { LITERALS } from '../../fixtures/constants.js'
 
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
-    cy.visit('/')
-    cy.contains('h1', 'Welcome to Your Vue.js App')
+describe('Contact book App', () => {
+  beforeEach(() => {
+    cy.visit("/")
   })
+
+  it('The user can see the home page', () => {
+    cy.contains('h3', LITERALS.HOME_TITLE)
+  })
+  
 })

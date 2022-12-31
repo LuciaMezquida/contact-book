@@ -1,3 +1,5 @@
+import { selectors } from '../fixtures/selectors.js'
+import { LITERALS } from '../fixtures/constants.js'
 import { expect, test } from '@jest/globals';
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import DialogDeleteContact from '@/views/ListView/components/Dialogs/DialogDeleteContact'
@@ -22,12 +24,12 @@ describe('DialogDeleteContact', () => {
     }
   })
   test('should show a warning message', () => {
-    expect(wrapper.vm.$el.querySelector('[data-testid="dialog-delete-text"]').textContent).toMatch(/Are you sure you want to delete this contact?/)
+    expect(wrapper.vm.$el.querySelector(selectors.DIALOG_DELETE_CONTACT.MESSAGE).textContent).toMatch(LITERALS.DIALOG_DELETE_CONTACT_MESSAGE)
   })
   test('should show a "Cancel" button', () => {
-    expect(wrapper.find('[data-testid="dialog-delete-cancel-btn"]').exists()).toBe(true)
+    expect(wrapper.find(selectors.DIALOG_DELETE_CONTACT.CANCEL_BUTTON).exists()).toBe(true)
   })
   test('should show an "OK" button', () => {
-    expect(wrapper.find('[data-testid="dialog-delete-save-btn"]').exists()).toBe(true)
+    expect(wrapper.find(selectors.DIALOG_DELETE_CONTACT.SAVE_BUTTON).exists()).toBe(true)
   })
 })

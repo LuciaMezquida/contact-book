@@ -1,3 +1,5 @@
+import { selectors } from '../fixtures/selectors.js'
+import { LITERALS } from '../fixtures/constants.js'
 import { expect, test } from '@jest/globals';
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import DialogForm from '@/views/ListView/components/Dialogs/DialogForm'
@@ -27,25 +29,25 @@ describe('DialogForm', () => {
       }
     })
     test('should show a title received by props', () => {
-      expect(wrapper.vm.$el.querySelector('[data-testid="dialog-form-title"]').textContent).toMatch(/New contact/)
+      expect(wrapper.vm.$el.querySelector(selectors.DIALOG_FORM.TITLE).textContent).toMatch(LITERALS.DIALOG_FORM_TITLE)
     })
     test('should show a "First name" completed input', () => {
-      expect(wrapper.find('[data-testid="dialog-input-first-name"]').attributes('value')).toBe('Piggy')
+      expect(wrapper.find(selectors.DIALOG_FORM.FIRST_NAME_INPUT).attributes('value')).toBe('Piggy')
     })
     test('should show a "Last name" completed input', () => {
-      expect(wrapper.find('[data-testid="dialog-input-last-name"]').attributes('value')).toBe('Pig')
+      expect(wrapper.find(selectors.DIALOG_FORM.LAST_NAME_INPUT).attributes('value')).toBe('Pig')
     })
     test('should show a "Email" completed input', () => {
-      expect(wrapper.find('[data-testid="dialog-input-email"]').attributes('value')).toBe('peggy@muppets.com')
+      expect(wrapper.find(selectors.DIALOG_FORM.EMAIL_INPUT).attributes('value')).toBe('peggy@muppets.com')
     })
     test('should show a "Phone number" completed input', () => {
-      expect(wrapper.find('[data-testid="dialog-input-phone-number"]').attributes('value')).toBe('2412341234')
+      expect(wrapper.find(selectors.DIALOG_FORM.PHONE_NUMBER_INPUT).attributes('value')).toBe('2412341234')
     })
     test('should show a "Cancel" button', () => {
-      expect(wrapper.find('[data-testid="dialog-form-cancel-btn"]').exists()).toBe(true)
+      expect(wrapper.find(selectors.DIALOG_FORM.CANCEL_BUTTON).exists()).toBe(true)
     })
     test('should show an "OK" button', () => {
-      expect(wrapper.find('[data-testid="dialog-form-save-btn"]').exists()).toBe(true)
+      expect(wrapper.find(selectors.DIALOG_FORM.SAVE_BUTTON).exists()).toBe(true)
     })
   })
   
@@ -67,7 +69,7 @@ describe('DialogForm', () => {
     })
     test('should show a disabled "OK" button', async() => {
       await wrapper.setData({ valid: false })
-      expect(wrapper.find('[data-testid="dialog-form-save-btn"]').attributes('disabled')).toBe('true')
+      expect(wrapper.find(selectors.DIALOG_FORM.SAVE_BUTTON).attributes('disabled')).toBe('true')
     })
   })
 })

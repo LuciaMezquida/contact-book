@@ -2,12 +2,12 @@ export const CONTACT_TABLE_HEADERS = [
   { 
     text: 'First Name', 
     value: 'firstName',
-    sortable: false
+    sortable: true
   },
   { 
     text: 'Last Name', 
     value: 'lastName' ,
-    sortable: false
+    sortable: true
   },
   { 
     text: 'Email', 

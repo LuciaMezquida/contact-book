@@ -1,5 +1,6 @@
 <template>
   <v-data-table
+    data-testid="contact-table"
     :headers="contactTableHeaders"
     :items="contactList"
     :loading="loading"
@@ -38,10 +39,10 @@
     </template>
     <!-- TABLE ACTIONS -->
     <template #item.actions="{ item }">
-      <v-btn icon class="mr-2" @click="editContact(item)">
+      <v-btn icon class="mr-2" data-testid="edit-contact-button" @click="editContact(item)">
         <v-icon small>mdi-pencil</v-icon>
       </v-btn>
-      <v-btn icon @click="deleteContact(item)">
+      <v-btn icon data-testid="delete-contact-button" @click="deleteContact(item)">
         <v-icon small>mdi-delete</v-icon>
       </v-btn>
     </template>

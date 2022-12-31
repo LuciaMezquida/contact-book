@@ -1,3 +1,4 @@
+import { LITERALS } from '../fixtures/constants.js'
 import { expect, test } from '@jest/globals';
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import ContactTable from '@/views/ListView/components/ContactTable/ContactTable'
@@ -18,7 +19,7 @@ describe('ListView', () => {
     router
   })
   test('should show a "Contact list" title', () => {
-    expect(wrapper.vm.$el.querySelector('h3').textContent).toMatch(/Contact list/)
+    expect(wrapper.vm.$el.querySelector('h3').textContent).toMatch(LITERALS.HOME_TITLE)
   })
   test(`should render the 'ContactTable' component`, () => {
     expect(wrapper.findComponent(ContactTable).exists()).toBe(true)
