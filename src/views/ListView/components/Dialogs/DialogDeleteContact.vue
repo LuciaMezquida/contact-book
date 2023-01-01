@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="showDialogDelete" max-width="500px">
-    <v-card>
+    <v-card data-testid="dialog-delete">
       <v-card-title class="text-h6 pa-6" data-testid="dialog-delete-text">Are you sure you want to delete this contact?</v-card-title>
       <v-card-actions class="pb-6 pr-6">
         <v-spacer></v-spacer>

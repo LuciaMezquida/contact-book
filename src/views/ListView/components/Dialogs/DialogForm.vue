@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="showDialog" max-width="500px" persistent>
-    <v-card>
+    <v-card data-testid="dialog-form">
       <v-form ref="form" v-model="valid">
         <v-card-title class="pt-6 pl-6">
           <span class="text-h5" data-testid="dialog-form-title">{{ formTitle }}</span>

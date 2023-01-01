@@ -1,5 +1,6 @@
 export const selectors = {
   DIALOG_FORM: {
+    DIALOG: "[data-testid='dialog-form']",
     TITLE: "[data-testid='dialog-form-title']",
     FIRST_NAME_INPUT: "[data-testid='dialog-input-first-name']",
     LAST_NAME_INPUT: "[data-testid='dialog-input-last-name']",
@@ -9,6 +10,7 @@ export const selectors = {
     SAVE_BUTTON: "[data-testid='dialog-form-save-btn']"
   },
   DIALOG_DELETE_CONTACT: {
+    DIALOG: "[data-testid='dialog-delete']",
     MESSAGE: "[data-testid='dialog-delete-text']",
     CANCEL_BUTTON: "[data-testid='dialog-delete-cancel-btn']",
     SAVE_BUTTON: "[data-testid='dialog-delete-save-btn']"
@@ -16,7 +18,7 @@ export const selectors = {
   CONTACT_TABLE: {
     TABLE: "[data-testid='contact-table']",
     ADD_CONTACT_BUTTON: "[data-testid='add-contact-button']",
-    EDIT_CONTACT_BUTTON: "[data-testid='edit-contact-button']",
-    DELETE_CONTACT_BUTTON: "[data-testid='delete-contact-button']"
+    EDIT_CONTACT_BUTTON: "[data-testid='edit-contact-button0']",
+    DELETE_CONTACT_BUTTON: "[data-testid='delete-contact-button0']"
   },
 };
