@@ -123,6 +123,16 @@
         set(value) {
           this.contact.phoneNumber = value
         }
+      },
+      updatedInputs() {
+        let updatedInputs = []
+        for(let key in this.contactInfo){
+          if(this.contactInfo[key] !== this.contact[key]){
+            updatedInputs.push(key)
+          }
+        }
+        return updatedInputs
+
       }
     },
     methods: {
@@ -133,7 +143,8 @@
       async saveContact() {
         const history = {
           date: Date.now(),
-          action: this.formTitle === 'New contact' ? 'created' : 'updated'
+          action: this.formTitle === 'New contact' ? 'created' : 'updated',
+          updatedInputs: this.updatedInputs
         }
         this.contact.history ? this.contact.history.push(history) : this.contact.history = [history]
         this.formTitle === 'New contact' ? await createContact(this.contact) : await updateContact(this.contactInfo.id, this.contact)

@@ -54,7 +54,8 @@
             <v-icon class="accent white--text" small>{{ setHistoryIcon(item.action) }}</v-icon>
           </v-list-item-avatar>
           <v-list-item-title class="body-2 item-title">{{ formatDate(item.date) }}:</v-list-item-title>
-          <v-list-item-subtitle>The contact has been {{ item.action }}</v-list-item-subtitle>
+          <v-list-item-subtitle v-if="item.action === 'created'">The contact has been {{ item.action }}</v-list-item-subtitle>
+          <v-list-item-subtitle v-else> {{inputUpdatedMessage(item.updatedInputs)}} {{ item.action }}</v-list-item-subtitle>
         </v-list-item>
       </td>
     </template>
@@ -125,7 +126,27 @@
       },
       setHistoryIcon(action){
         return action === 'created' ? 'mdi-auto-fix' : 'mdi-update'
-      }
+      },
+      inputTextTransform (input) {
+        switch (input) {
+          case 'firstName': return 'First Name'
+          case 'lastName': return 'Last Name'
+          case 'email': return 'Email'
+          case 'phoneNumber': return 'Phone Number'
+        }
+      },
+      inputUpdatedMessage(input) {
+        if(input.length === 1) return `The ${this.inputTextTransform(input[0])} input has been `
+        if(input.length === 2) return `The ${this.inputTextTransform(input[0])} and ${this.inputTextTransform(input[1])} inputs have been `
+        if(input.length >= 2){
+          let inputs = ''
+          input.forEach((item, i) => {
+            if(i === input.length - 1) inputs += `and ${this.inputTextTransform(item)}`
+            else inputs += `${this.inputTextTransform(item)}, `
+          })
+          return `The ${inputs} inputs have been `
+        }
+      },
     },
     components: {
       DialogDeleteContact,
