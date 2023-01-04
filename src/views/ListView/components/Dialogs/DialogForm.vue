@@ -15,6 +15,7 @@
                   data-testid="dialog-input-first-name"
                   label="First name"
                   :rules="[rules.required]"
+                  :autofocus="formTitle === 'New contact'"
                 />
               </v-col>
               <v-col cols="12" sm="6" md="6">

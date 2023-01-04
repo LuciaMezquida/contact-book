@@ -39,10 +39,10 @@
     </template>
     <!-- TABLE ACTIONS -->
     <template #item.actions="{ item, index }">
-      <v-btn icon class="mr-2" :data-testid="'edit-contact-button' + index" @click="editContact(item)">
+      <v-btn aria-label="Edit" icon class="mr-2" :data-testid="'edit-contact-button' + index" @click="editContact(item)">
         <v-icon small>mdi-pencil</v-icon>
       </v-btn>
-      <v-btn icon :data-testid="'delete-contact-button' + index" @click="deleteContact(item)">
+      <v-btn aria-label="Delete" icon :data-testid="'delete-contact-button' + index" @click="deleteContact(item)">
         <v-icon small>mdi-delete</v-icon>
       </v-btn>
     </template>

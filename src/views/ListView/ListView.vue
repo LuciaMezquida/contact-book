@@ -24,10 +24,12 @@
       }
     },
     methods: {
-      async getContactList() {
+      getContactList() {
         this.loading = true
-        this.contactList = await getContactList()
-        this.loading = false
+        getContactList()
+        .then(r => this.contactList = r)
+        .catch(e => console.log(e))
+        .finally(() => this.loading = false)
       }
     },
     mounted() {
